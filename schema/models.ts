@@ -1,17 +1,17 @@
 import * as z from "zod"
 
 
-export interface signUpFormSchema={
-  username : string
-  password : string
-  confirmPassword :  string
-
-}
+// export interface signUpFormSchema={
+//   username : string
+//   password : string
+//   confirmPassword :  string
+//
+// }
 
 
 export const signupschema = z.object({
-  email: z.string.email("invalid email try again"),
-  password : z.string.min(8, "password must be at least 8 characters long"),
+  email: z.string().email("invalid email try again"),
+  password : z.string().min(8, "password must be at least 8 characters long"),
   confirmPassword : z.string(),
 }).refine(data => data.password === data.confirmPassword, {
   message : "password doesnt match",

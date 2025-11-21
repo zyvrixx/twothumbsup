@@ -1,4 +1,7 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
+
 import {
   Card,
   CardContent,
@@ -13,50 +16,48 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import {signupschema} from "@/schema/model"
-import {userForm} from "react-hook-form"
-import {zodResolver} from "@hookform/resolver/zod"
-import {supabase} from "@/lib/supabase"
+
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { supabase } from "../lib/supabase"
+ 
+import { signupschema } from "@/schema/models"
 import * as z from "zod"
 
-type signupFormValue = z.infer<typeof signupschema> 
+type SignupFormValues = z.infer<typeof signupschema>
 
-const onSubmit = async (data : signupschema) => {
-  const {email, password} = data
+export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   
-  const {user, session, error }= await supabase.auth.signup({
-    email, password
-  })
-
-  if (!error) {
-     console.log("check your email to verify your account")
-  } else {
-     console.log(error.message)
-  }
-}
-
-
-export function SignupForm() {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<SignupFormValues>({
-    resolver: zodResolver(signupSchema),
-  });
+    resolver: zodResolver(signupschema),
+  })
 
+  const onSubmit = async (data: SignupFormValues) => {
+    const { email, password } = data
 
-const signupWithGoogle = async () => {
-    const {error} = await suabase.auth.signInWithOAuth({
-      provider : "google",
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+    })
+
+    if (error) {
+      console.log(error.message)
+    } else {
+      console.log("Check your email to verify your account")
+    }
+  }
+
+  const signupWithGoogle = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
     })
     if (error) console.log(error.message)
-}
+  }
 
-
-
-
-export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   return (
     <Card {...props}>
       <CardHeader>
@@ -66,7 +67,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -75,32 +76,59 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 type="email"
                 placeholder="m@example.com"
                 required
+                {...register("email")}
               />
-              <FieldDescription>
-                We&apos;ll use this to contact you. We will not share your email
-                with anyone else.
-              </FieldDescription>
+              {errors.email && (
+                <p className="text-red-500 text-sm">{errors.email.message}</p>
+              )}
             </Field>
+
             <Field>
               <FieldLabel htmlFor="password">Password</FieldLabel>
-              <Input id="password" type="password" required />
-              <FieldDescription>
-                Must be at least 8 characters long.
-              </FieldDescription>
+              <Input
+                id="password"
+                type="password"
+                required
+                {...register("password")}
+              />
+              {errors.password && (
+                <p className="text-red-500 text-sm">
+                  {errors.password.message}
+                </p>
+              )}
             </Field>
+
             <Field>
-              <FieldLabel htmlFor="confirm-password">
+              <FieldLabel htmlFor="confirmPassword">
                 Confirm Password
               </FieldLabel>
-              <Input id="confirm-password" type="password" required />
-              <FieldDescription>Please confirm your password.</FieldDescription>
+              <Input
+                id="confirmPassword"
+                type="password"
+                required
+                {...register("confirmPassword")}
+              />
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-sm">
+                  {errors.confirmPassword.message}
+                </p>
+              )}
             </Field>
+
             <FieldGroup>
               <Field>
-                <Button type="submit">Create Account</Button>
-                <Button variant="outline" type="button">
+                <Button disabled={isSubmitting} type="submit">
+                  {isSubmitting ? "Creating..." : "Create Account"}
+                </Button>
+
+                <Button
+                  variant="outline"
+                  type="button"
+                  onClick={signupWithGoogle}
+                >
                   Sign up with Google
                 </Button>
+
                 <FieldDescription className="px-6 text-center">
                   Already have an account? <a href="#">Sign in</a>
                 </FieldDescription>
@@ -112,3 +140,4 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     </Card>
   )
 }
+
