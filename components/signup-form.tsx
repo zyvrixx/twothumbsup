@@ -21,8 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { supabase } from "../lib/supabase"
 import { signupschema } from "@/schema/models"
 import * as z from "zod"
-type SignupFormValues = z.infer<typeof signupschema>
-
+type SignupFormValues = z.infer<typeof signupschema> 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   
   const {
