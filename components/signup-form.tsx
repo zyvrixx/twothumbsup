@@ -16,14 +16,11 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { supabase } from "../lib/supabase"
- 
 import { signupschema } from "@/schema/models"
 import * as z from "zod"
-
 type SignupFormValues = z.infer<typeof signupschema>
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
@@ -34,7 +31,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     formState: { errors, isSubmitting },
   } = useForm<SignupFormValues>({
     resolver: zodResolver(signupschema),
-  })
+  }) 
 
   const onSubmit = async (data: SignupFormValues) => {
     const { email, password } = data
