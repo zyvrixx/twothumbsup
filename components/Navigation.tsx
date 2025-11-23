@@ -1,5 +1,7 @@
 import Link from "next/link"
+import Image from "next/image"
 import SearchBar from "./Search"
+
 const NavigationItems = ["Quotes", "BlogPost", "About Us", "Contact Us"]
 
 export default function Navigation() {
@@ -8,8 +10,16 @@ export default function Navigation() {
       
     {/* Logo */}
     <div className="flex items-center gap-5">
-    <div className="w-12 h-12 rounded-full bg-black"></div>
-    <p className="text-white font-semibold text-md lg:text-lg">Two Thumbs Up</p>
+    <div className="w-16 h-16 rounded-full overflow-hidden ">
+      <Image 
+            className="w-full h-full "
+            src="/twothumbs.png"
+            alt="Two Thumbs Up logo"
+            width={100}
+            height={100}
+        />
+    </div>
+    <p className ="text-white md-visible hidden font-semibold text-md lg:text-lg">Two Thumbs Up</p>
     </div>
     
 {/*SearchBar */}

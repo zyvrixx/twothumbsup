@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils"
-
+import {useRouter} from "next/navigation"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -29,6 +29,9 @@ className,
 ...props
 }: React.ComponentProps<"div">) {
 
+
+const router = useRouter()
+
 const {
 register,
 handleSubmit,
@@ -42,13 +45,18 @@ const onSubmit = async (data : SignFormValues) => {
 
   const {error} = await supabase.auth.signInWithPassword({
     email,
-    password
+    password,
+    options : {
+        emailRedirectTo :"http://localhost:3000"
+      }
   })
 
     if (error) {
       console.log(error.message) 
     } else {
     console.log("youre now login")}
+    router.push("/")
+    router.refresh()
 
     //add a better error handler to ensure that it wont be that easy for an attacker to guess password
     //dont rerturn the error for each username or password
@@ -63,7 +71,7 @@ const onSubmit = async (data : SignFormValues) => {
       provider : "google",
       options : {
       // insert a redirect maybe the one in the supabase google redirect find it
-      redirectTo : "http:localhost:3000/home"
+      redirectTo : "http://localhost:3000"
     },
     })
   }
