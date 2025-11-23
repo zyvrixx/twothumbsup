@@ -1,7 +1,7 @@
-import {supabase } from "@/lib/supabase"
+// import {supabase } from "@/lib/supabase"
 // import { quoteSchema } from "@/schema/models"
 // import { supabaseServer } from "@/lib/server"
-import * as z from "zod"
+// import * as z from "zod"
 // import { Quote } from "lucide-react"
 
 // type Quote = z.infer<typeof quoteSchema>
@@ -10,20 +10,6 @@ import * as z from "zod"
 //import data from facebook then upsert 
 //cause i will repeat this request everyday
 
-
-const pageid = process.env.PAGE_ID!
-const pagetoken = process.env.PAGE_ACCESS_TOKEN!
-
-export async function GET (req : Request, res : Response) {
-    try {
-    
-    const {data, error} = await supabase.from("posts").select("*")    
-    return Response.json(data)
-    } catch(error) {
-    if (error) return Response.json(error)
-    }
-    //replace this with a custom middleware to check for errors
-}
 /* 
 export async function POST(req :  Request) {
    try {
