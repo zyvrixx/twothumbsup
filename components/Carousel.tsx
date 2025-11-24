@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from "react";
+import {MoreHorizontal} from "lucide-react"
+import { MessageCircle } from "lucide-react"
 import Filter from "./Filter"
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -50,10 +52,14 @@ export default function CarouselMockup() {
           <DialogTrigger asChild>
             {/* IMPORTANT: button fixes the error */}
             <div
-              className={`${item.color} w-70 h-90 relative flex-shrink-0 rounded-lg cursor-pointer flex items-center justify-center text-white font-bold`}
+              className={`${item.color} w-70 h-90 relative flex-shrink-0 rounded-lg cursor-pointer flex items-center justify-center 
+            text-white 
+            font-bold
+            gap-x-10`}
             >
               {item.title}
               <CardFooter className="flex absolute left-0 bottom-2 justify-between items-center">
+              <div className=" flex mx-5 ">
                 <Button
                   variant="ghost"
                   size="sm"
@@ -65,9 +71,37 @@ export default function CarouselMockup() {
                       liked.includes(item.id) ? "text-red-500" : ""
                     }`}
                   />
-                  {liked.includes(item.id) ? "Liked" : "Like"}
                 </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => toggleLike(item.id)}
+                  className="flex items-center gap-1"
+                >
+                  <MessageCircle
+                    className={`transition-colors ${
+                      liked.includes(item.id) ? "text-red-500" : ""
+                    }`}
+                  />
+                </Button>
+
+            </div>
+               <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => toggleLike(item.id)}
+                  className="flex items-center gap-1"
+                >
+                  <MoreHorizontal
+                    className={`transition-colors ${
+                      liked.includes(item.id) ? "text-red-500" : ""
+                    }`}
+                  />
+                </Button>
+
               </CardFooter>
+
+              
             </div>
           </DialogTrigger>
 
@@ -93,7 +127,6 @@ export default function CarouselMockup() {
                       liked.includes(item.id) ? "text-red-500" : ""
                     }`}
                   />
-                  {liked.includes(item.id) ? "Liked" : "Like"}
                 </Button>
               </CardFooter>
             </Card>
