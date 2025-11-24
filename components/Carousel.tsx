@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import Filter from "./Filter"
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,16 +38,37 @@ export default function CarouselMockup() {
   };
 
   return (
-    <div className="flex gap-4 overflow-x-auto p-4">
+    <div className="flex max-sm:flex-col max-sm:overfow-y-auto max-sm:pt-35 max-sm:gap-y-4 hide-scrollbar pt-22 bg-slate-100 rounded-lg relative gap-x-6.5 p-4 overflow-x-auto items-center">
+
+    
+     <div className="absolute top-0  left-0 py-3 px-4">
+
+    <Filter></Filter>
+      </div> 
       {items.map((item) => (
         <Dialog key={item.id}>
           <DialogTrigger asChild>
             {/* IMPORTANT: button fixes the error */}
-            <button
-              className={`${item.color} w-48 h-48 rounded-lg cursor-pointer flex items-center justify-center text-white font-bold`}
+            <div
+              className={`${item.color} w-70 h-90 relative flex-shrink-0 rounded-lg cursor-pointer flex items-center justify-center text-white font-bold`}
             >
               {item.title}
-            </button>
+              <CardFooter className="flex absolute left-0 bottom-2 justify-between items-center">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => toggleLike(item.id)}
+                  className="flex items-center gap-1"
+                >
+                  <Heart
+                    className={`transition-colors ${
+                      liked.includes(item.id) ? "text-red-500" : ""
+                    }`}
+                  />
+                  {liked.includes(item.id) ? "Liked" : "Like"}
+                </Button>
+              </CardFooter>
+            </div>
           </DialogTrigger>
 
           <DialogContent className="sm:max-w-sm">
@@ -79,6 +101,5 @@ export default function CarouselMockup() {
         </Dialog>
       ))}
     </div>
-  );
-}
+  )}
 

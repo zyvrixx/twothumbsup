@@ -22,3 +22,11 @@ export const loginschema = z.object({
   email : z.string().email("invalid email try again"),  
   password : z.string()
 })
+
+export const QuoteSchema = z.object({
+  id : z.string(),
+  title :  z.string().optional(),
+  tag :z.array(z.string),
+  createdAt : z.date(),
+  contentUrl : z.url().optional()
+})
