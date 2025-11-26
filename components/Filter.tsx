@@ -20,7 +20,7 @@ type Props = {
   onFilter?: (filtered: Quote[]) => void;
 };
 
-export default function QuoteFilter({ quotes = [], onFilter = () => {} }: Props) {
+export default function FilterComponent({ quotes = [], onFilter = () => {} }: Props) {
   const [genre, setGenre] = useState<string | "all">("all");
   const [sort, setSort] = useState<"asc" | "desc">("desc");
 

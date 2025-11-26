@@ -5,9 +5,12 @@ import * as z from "zod"
 
 type blogpostSchema = z.infer<typeof blogpostSchema>
 
-export default function BlogPostComponents() {
-    return <div className="w-full roudned-lg h-full my-5 bg-green-300">
 
+
+export default function BlogPostComponents({}: blogpostschema) {
+    return <div className="w-full roudned-xl h-full p-5   bg-green-300">
+
+      <p>this is a test</p>
 
     </div>
 }
