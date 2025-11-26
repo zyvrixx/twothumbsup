@@ -58,8 +58,8 @@ export default function CarouselMockup() {
             gap-x-10`}
             >
               {item.title}
-              <CardFooter className="flex absolute left-0 bottom-2 justify-between items-center">
-              <div className=" flex mx-5 ">
+              <CardFooter className="flex gap-x-30 absolute left-0 bottom-2 justify-between ">
+              <div className=" flex ">
                 <Button
                   variant="ghost"
                   size="sm"
