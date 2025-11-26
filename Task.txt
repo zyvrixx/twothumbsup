@@ -1,0 +1,16 @@
+Fix the backend add routed to make it usable and to be able to deploy it
+
+fix the ui to make it a production grade
+
+add security and try to break the site in order to mkae it better
+
+add middlware and such
+
+// add  more task here in order to ensure the flow of this
+
+after making this an mvp deploy it
+
+this is me doing somethings here in
+
+11/26/06 
+add a note everytime to keep notes

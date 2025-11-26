@@ -44,8 +44,7 @@ export default function CarouselMockup() {
 
     
      <div className="absolute top-0  left-0 py-3 px-4">
-
-    <Filter></Filter>
+    {/* fix the ui of this to be more reusable and not just a patch up work */}
       </div> 
       {items.map((item) => (
         <Dialog key={item.id}>
