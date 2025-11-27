@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import {loginschema} from "../schema/models"
+import * as z from "zod"
 import {zodResolver} from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import {supabase} from "@/lib/supabase"
@@ -46,9 +47,9 @@ const onSubmit = async (data : SignFormValues) => {
   const {error} = await supabase.auth.signInWithPassword({
     email,
     password,
-    options : {
+    /* options : {
         emailRedirectTo :"http://localhost:3000"
-      }
+      } */
   })
 
     if (error) {

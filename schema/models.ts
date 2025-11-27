@@ -23,10 +23,25 @@ export const loginschema = z.object({
   password : z.string()
 })
 
-export const QuoteSchema = z.object({
-  id : z.string(),
-  title :  z.string().optional(),
-  tag :z.array(z.string),
-  createdAt : z.date(),
-  contentUrl : z.url().optional()
+
+export const blogpostSchema = z.object({
+  Title : z.string(),
+  ContentUrl : z.url().optional(),
+  Content :z.string(),
+  Tags :z.array(z.string()),
+})
+
+export const quoteSchema = z.object({
+  Title : z.string(),
+  ContentUrl : z.url(),
+  Tags : z.array(z.string()),
+})
+
+export const ImageFileUploadSchema = z.object({
+  File : z.any().refine((file) => file?.length === 1, "please upload a file ")
+  .refine((file) => file && file[0].size <= 5 * 1024 * 1024, "file must be less than 5mb" )
+  .refine((file) => ["image/png", "image/jpeg"].includes(file[0].type), "file must be a Image"),
+  Title : z.string(),
+  Tags : z.array(z.string())
+  
 })
