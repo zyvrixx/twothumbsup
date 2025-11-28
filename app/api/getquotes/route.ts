@@ -30,7 +30,7 @@ export async function POST (req : Request) {
     title,
     tags,
     ImagePath : filePath,
-    created_by : userid, 
+    created_by : "6113af19-9da5-4dce-ae45-bdf56dee3f30", 
     content_url : PublicUrl,
    })
 

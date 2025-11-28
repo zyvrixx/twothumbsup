@@ -12,5 +12,13 @@ after making this an mvp deploy it
 
 this is me doing somethings here in
 
-11/26/06 
+11/26/25 
 add a note everytime to keep notes
+
+11/28/25 
+
+im in progress with fixing the upload thing the missing one is pushin data into the
+profile tables upon siginig 
+
+fix all the other backend function as well 
+to ensure everything works fine
