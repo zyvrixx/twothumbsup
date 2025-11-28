@@ -63,6 +63,8 @@ export async function POST (req : Request) {
     ImagePath : filePath
    })
 
+   //chanage the ImagePath if it fails
+
    if (error) return NextResponse.json(error.message)
 
     return NextResponse.json("upload successfull")
@@ -71,5 +73,7 @@ export async function POST (req : Request) {
 
 export async function GET() {
     const {error, data} = await supabaseServer.from("post").select("*")
-    .order("created_at", {ascending : false})
+    .order("created_at", {ascending : false}) 
+    return NextResponse.json(data)
+    //get add middlware and error handler here
 }

@@ -1,10 +1,10 @@
-import {createClient} from "@supabase/supabase-js"
+import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = proccess.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseRoleKey = proccess.env.SUPABASE_SERVICE_ROLE_KEY!
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!; // fixed typo
 
-export supabaseServer = createClient(supabaseUrl, supabaseRoleKey, {
-  auth : {
-    persistSession : false
-  }
-})
+export const supabaseServer = createClient(supabaseUrl, supabaseRoleKey, {
+  auth: {
+    persistSession: false,
+  },
+});

@@ -42,6 +42,5 @@ export const ImageFileUploadSchema = z.object({
   .refine((file) => file && file[0].size <= 5 * 1024 * 1024, "file must be less than 5mb" )
   .refine((file) => ["image/png", "image/jpeg"].includes(file[0].type), "file must be a Image"),
   Title : z.string(),
-  Tags : z.array(z.string())
-  
+  Tags : z.string().transform((val) => val.split(/[, ]/).map((tag) => tag.trim().toLowerCase()).filter(Boolean) ).refine((arr) => arr.length > 0, "it require at least one tag" ).optional() 
 })
